@@ -21,8 +21,9 @@ export default function VotePage() {
     fetchVote();
   }, []);
 
-  const handleVote = (e) => {
-    console.log("voted for ", e);
+  const handleVote = async (id) => {
+    console.log("hi", id)
+    const res = await axios.post(`http://localhost:4000/pictures/${id}/upvote`)
   };
   return (
     <main>
@@ -35,12 +36,12 @@ export default function VotePage() {
                 src={picture.url}
                 rounded
                 fluid
-                onClick={() => handleVote(picture.id)}
+                onClick={() => handleVote(picture._id)}
                 style={{ cursor: "pointer", maxHeight: "500px", width: "100%" }}
               />
               <Button
                 variant="primary"
-                onClick={() => handleVote(picture.id)}
+                onClick={() => handleVote(picture._id)}
                 className="mt-3"
               >
                 Vote for this one <AiFillLike />
