@@ -28,7 +28,7 @@ export default function VotePage() {
   return (
     <main>
       <Container>
-        <h1 className="mb-4">Which picture is cuter?</h1>
+        <h1 className="mb-4">Which is cuter?</h1>
         <Row className="justify-content-center">
           {pictures.map((picture) => (
             <Col key={picture._id} xs={12} md={5} className="mb-4">
