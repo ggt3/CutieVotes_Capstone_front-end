@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import "../styles/NavBar.css";
 import { useAuth } from "../services/AuthProvider";
-
+import Navbar from "react-bootstrap/Navbar"
 export default function NavBar() {
   const { user, logout } = useAuth();
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light bg-light "
+    <Navbar
+      className="navbar navbar-expand-lg navbar-light bg-light p-3"
       style={{ gap: "15px" }}
     >
       <NavLink
@@ -27,12 +27,19 @@ export default function NavBar() {
       >
         Vote
       </NavLink>
+     
       <nav className="ms-auto">
       {user ? (
         <>
+         <NavLink
+        to="/favorites"
+        className={({ isActive }) => (isActive ? "active-link" : "") + " me-3"}
+      >
+        Favorites 
+      </NavLink>
           <span>Welcome, <strong>{user}</strong>! </span>
-          <button className="uppercase" onClick={logout}>
-            Log out
+          <button className="ms-2" onClick={logout}>
+            logout
           </button>
         </>
       ) : (
@@ -41,6 +48,6 @@ export default function NavBar() {
         </NavLink>
       )}
 </nav>
-    </nav>
+    </Navbar>
   );
 }

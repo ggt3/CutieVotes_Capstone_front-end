@@ -1,3 +1,6 @@
 .active-link {
-    color: #5754a8;
+    color: #007bff;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+    
   }
