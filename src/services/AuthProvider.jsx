@@ -6,21 +6,20 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
+  const [password, setPassword] = useState(null);
+  const [token, setToken] = useState(sessionStorage.getItem("token") || null);
   const navigate = useNavigate();
-  
-  const loginAction = async (data) => {
+
+  const loginAction = async ({username,password}) => {
     try {
-      console.log("data", data)
+      console.log("loginAction() - data", username,password);
       const response = await axios.post("http://localhost:4000/login", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        username,
+        password,
       });
       const res = await response.data;
-      console.log(res)
-      if (res) {
+      console.log(res);
+      if (res) { //login passes
         setUser(res.username);
         setToken(res.token);
         sessionStorage.setItem("token", res.token);
@@ -33,21 +32,24 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const logOut = () => {
+  const logout = () => {
     setUser(null);
-    setToken("");
-    localStorage.removeItem("site");
+    setToken(null);
+    console.log("logging out");
+    sessionStorage.removeItem("token");
     navigate("/login");
   };
 
   const getToken = () => {
-    const tokenString = sessionStorage.getItem('token')
+    const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
-    return userToken?.token
-  }
-  
+    return userToken?.token;
+  };
+
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut, getToken }}>
+    <AuthContext.Provider
+      value={{ token, user, loginAction, logout, getToken }}
+    >
       {children}
     </AuthContext.Provider>
   );
