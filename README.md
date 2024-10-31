@@ -1,5 +1,7 @@
 # Capstone Project - CutieVotes (front-end)
 
+A website to vote on cute pictures and see your favorites. You must log in to play.
+
 ### Run Server
 
 `npm run dev` command after building the project
@@ -19,10 +21,15 @@
 - Use React Hooks or Redux for your application state management.
 - Interface directly with the [server and API you created](https://github.com/ggt3/CutieVotes_Capstone_back-end)
 
+### Resources
+[useContext YT Tutorial](https://www.youtube.com/watch?v=hUhWtYXgg0I)
+
+### What I learned
+I am the most proud of learning user authentication with useContext and protecting routes. Next steps are to increase password security.
+
 
 ### Feature to-do's
 - [X] user auth /protected routes
 - [ ] secure password hashing
 - [ ] create-and-update-user functionality/page
-
-
+- [ ] removing a favorite from your likes
