@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import TopPage from "./pages/TopPage";
 import AuthProvider from "./services/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
+import FavoritesPage from "./pages/FavoritesPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/vote" element={<VotePage />} />
             <Route path="/top" element={<TopPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
           </Route>
         </Routes>
       </AuthProvider>

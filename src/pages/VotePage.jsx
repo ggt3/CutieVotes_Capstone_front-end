@@ -4,31 +4,38 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button"
+import Button from "react-bootstrap/Button";
 import { AiFillLike } from "react-icons/ai";
+import { useAuth } from "../services/AuthProvider";
 
 export default function VotePage() {
+    const {user} = useAuth()
   const [pictures, setPictures] = useState([]);
   const [voted, setVoted] = useState(false);
 
   useEffect(() => {
     const fetchVote = async () => {
-      const res = await axios.get("http://localhost:4000/pictures/add/static");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/pictures/compare`
+      );
       const data = await res.data;
-      console.log(data);
       setPictures(data);
+      setVoted(false);
     };
     fetchVote();
-  }, []);
+  }, [voted]);
 
   const handleVote = async (id) => {
-    console.log("hi", id)
-    const res = await axios.post(`http://localhost:4000/pictures/${id}/upvote`)
+    console.log("hi", id);
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/pictures/${id}/upvote?user=${user}`
+    );
+    setVoted(true);
   };
   return (
     <main>
       <Container>
-        <h1 className="mb-4">Which is cuter?</h1>
+        <h1 className="display-3 text-center fw-bold p-4">Which is cuter?</h1>
         <Row className="justify-content-center">
           {pictures.map((picture) => (
             <Col key={picture._id} xs={12} md={5} className="mb-4">

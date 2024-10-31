@@ -12,7 +12,7 @@ export default function TopPage() {
 
   useEffect(() => {
     const fetchTopPics = async () => {
-      const res = await axios.get("http://localhost:4000/pictures/top");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/pictures/top`);
       const data = await res.data;
       console.log(data);
       setPictures(data);
